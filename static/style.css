@@ -1,0 +1,61 @@
+*{
+        margin: 0%;
+        padding: 0%;
+    }
+    html{
+        height: 100%;
+    }
+    body{
+        height: 100%;
+    }
+@media screen and (min-width: 700px) {
+    
+    header{
+        height:20%;
+        background-color: rgb(137, 234, 244);
+        
+    }
+    .headerh1{
+        text-align: center;
+        text-decoration: wavy;
+        text-transform: capitalize;
+        font-size: 80px;
+        color:green;
+        font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+    main{
+        height: 80%;
+        background-color: rgb(225, 249, 188);
+        display: flex;
+        text-align: center;
+    }
+    .message,.receive {
+        width: 80%;
+        height: 40px;
+        margin-top: 20px;
+        
+    }
+    .button{
+       display: grid;
+       margin-left: 300px;
+       margin-top: 50px;height:
+        40px;width: 100px;
+    }
+    .otp{
+        margin-top: 100px;
+        background-color: rgba(216, 237, 151, 0.706);
+        height: 100px;
+        width: 80%;
+        margin-left: 140px;
+        overflow:scroll;
+    }
+    .received{
+        margin-top: 100px;
+        background-color: rgba(216, 237, 151, 0.706);
+        height: 300px;
+        width: 80%;
+        margin-left: 140px;
+        overflow:scroll;
+    }
+       
+} 

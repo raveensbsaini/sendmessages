@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="{{ url_for('static',filename='script.js')}}"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename ='style.css') }}">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sendmessage</title>
+</head>
+<body>
+    <header>
+        <h1 class="headerh1">send message </h1>
+    </header>
+    <main >
+        <div style="width: 50%;" >
+            <h1>SEND HERE!</h1>
+            <form method="post">
+                <label for="122"> Message</label>
+                <input type="text" class="message" id="122"  placeholder="write message here"  name="fmessage">
+                <input type="submit"  value="Click Here"  class ="button" id="one" > 
+            </form>
+            <div class="otp"> {{ fmessage }} {{ fotp }}</div>
+            <button>COPY</button>
+           
+        </div>
+        <div style="width: 50%;" >
+            <h1>RECEIVE HERE!</h1>
+            <form method="post">
+                <label for="123">RECEIVE</label>
+                <input type="number"class="receive" id="123" placeholder="write otp here" name="fnumber" >
+                <input type="submit" value="Click Here" class="button" >
+            </form>
+            <div class="received" >{{ f2message }}</div>
+            <button>COPY</button>
+        </div>
+    </main>
+</body>
+</html>
