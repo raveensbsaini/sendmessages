@@ -1,5 +1,5 @@
 # Project title
->SENDFILES
+>SENDmessage
 ## youtube video link
 > https://youtu.be/5R2YQq4QEXc?si=EE8VYo3U0xibVHpx
 > watch full video for more info
