@@ -2,6 +2,7 @@
 >SENDFILES
 ## youtube video link
 > https://youtu.be/5R2YQq4QEXc?si=EE8VYo3U0xibVHpx
+> watch full video for more info
 > you can see a quick demonstration of my web app uses and how to use by clicking link above given in youtube video link section.
 ## installation
 > to install this webiste go to github account search lavanyaarora003(when uploaded). in public section you will find a repo . clone the repo locally on your device. and run command python3 app.py. now go to localhost and use this (try to deploy in server). or user may use another command flask run. it will also host sendFiles webiste on your localhost at port 5000
