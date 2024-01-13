@@ -3,79 +3,79 @@ import random
 import sqlite3
 import time
 class Sqlite:
-    def __init__(self,message,number):
-        self.message = message
-        self.number = number
-    def otpreturn(self):
-        list = []
+    def __init__(self):
         con = sqlite3.connect("messages.db")
         cur = con.cursor()
-        cur.execute("SELECT otp FROM messages;")
-        con.commit()
-        data = cur.fetchall()
+        self.con = con
+        self.cur = cur
+    def otpreturn(self,message):
+        list = []
+        
+        self.cur.execute("SELECT otp FROM messages;")
+        self.con.commit()
+        data = self.cur.fetchall()
         for i in data:
             list.append(i[0])
         otp = random.randrange(100000,999999)
         while otp in list:
             otp = random.randrange(100000,999999)
-        con.close()
+        self.setdatabase(otp,message)
         return otp
-    def setdatabase(self,otp):
+    def setdatabase(self,otp,message):
         current_time = time.strftime("%a, %d %b %Y %H:%M:%S +0000",time.gmtime())
-        con = sqlite3.connect("messages.db")
-        cur = con.cursor()
-        cur.execute(f"INSERT INTO messages (otp,message,time) VALUES({ otp },'{ self.message}','{ current_time}');")
-        con.commit()
-        con.close()
-    def getdatabase(self):
-        con = sqlite3.connect("messages.db")
-        cur = con.cursor()
-        cur.execute(f"SELECT * FROM messages WHERE otp = {self.number};")
-        con.commit()
-        data = cur.fetchall()
-        con.close()
+        self.cur.execute("INSERT INTO messages (otp,message,time) VALUES(?,?,?);",(otp,message,current_time))
+        self.con.commit()
+    def getdatabase(self,number):
+        self.cur.execute(f"SELECT * FROM messages WHERE otp = {number};")
+        self.con.commit()
+        data = self.cur.fetchall()
         return data[0][1]
-
+    def __del__(self):
+        self.con.close()
 class Dictionary:
-    dic = {}
-    def __init__(self,message,number):
-        self.message = message
-        self.number = number
-    def setdatabase(self,otp):  
-        self.dic[otp] = self.message
+   
+    def __init__(self): 
+        dic = {}
+        print("creating object")
+        self.dic = dic
+    def setdatabase(self,otp,message):  
+        self.dic[otp] = message
+        print(self.dic)
         return None
-    def otpreturn(self):
+    def otpreturn(self,message):
         otp = random.randrange(100000,999999)
         while otp in self.dic:
             otp = random.randrange(100000,999999)
+        self.setdatabase(otp,message)
         return otp
-    def getdatabase(self):
-        return self.dic[int(self.number)]
-def main(bool: bool,message,number):
+    def getdatabase(self,number):
+        print(self.dic)
+        return self.dic[int(number)]
+def main(bool:bool):
     if bool == True:
-       object = Dictionary(message,number)
+       object = Dictionary()
        return object
     else:
-        object= Sqlite(message,number)
+        object= Sqlite()
         return object
-
+ravi = main(True)
 app = Flask(__name__)
 @app.route("/",methods = ["GET","POST"])
-def ravi():
+def home():
+    
     if request.method == "GET":
         return render_template("index.html")
     if request.method == "POST":
         message = request.form.get("fmessage")
         number = request.form.get("fnumber")
-        ravi = main(False,message,number)
+        
         if message == None and number == None:
             return render_template("index.html")
         if message != None and number == None:
-            otp = ravi.otpreturn()
-            ravi.setdatabase(otp)
+            otp = ravi.otpreturn(message)
             return render_template("index.html",fmessage = "ONE TIME OTP: ",fotp = otp)
         if message == None and number != None:
-            string = ravi.getdatabase()
+            string = ravi.getdatabase(number)
             return render_template("index.html",f2message = string)
     return render_template("index.html")
 
